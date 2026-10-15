@@ -1,0 +1,48 @@
+
+#include <iostream>
+using namespace std;
+void Max(int a,int b,int& max)
+{
+    if(a>b)
+    {
+        max=a;
+    }
+    else{
+        max=b;
+    }
+}
+int main(){
+    int x=10;
+    int y=20;
+    int z;
+    Max(x,y,z);
+    cout<<"最大值为"<<z<<endl;
+    return 0;
+}
+
+
+
+#include <iostream>
+using namespace std;
+
+void Max(int a,int b,int **result)
+{
+    int max;
+    if(a>b)
+    {
+        max=a;
+    }
+    else{
+        max=b;
+    }
+    **result=max;
+}
+int main(){
+    int x=10;
+    int y=20;
+    int z;
+    int *p=&z;
+    Max(x,y,&p);
+    cout<<"最大值为"<<z<<endl;
+    return 0;
+}

@@ -1,0 +1,9 @@
+# 编译产物
+output/
+*.o
+*.obj
+*.exe
+*.out
+*.dSYM/
+.DS_Store
+.vscode/

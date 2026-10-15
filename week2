@@ -1,0 +1,103 @@
+//构造函数 三个形参 前两个输入型 第三个输出型。求两数之和 从函数抓回两个返回值，一个是执行状态 一个是两数之和。
+//成功则输出结果 失败则提示
+#include <iostream>
+using namespace std;
+
+int Sum(int a,int b,int &c){
+    c=a+b;
+    return 0;//成功
+}
+int main(){
+    int x=10;
+    int y=20;
+    int z;
+    int status=Sum(x,y,z);//用status接受执行状态，z接受和
+    if (status==0){
+        cout<<"计算成功，和为："<<z<<endl;
+    }
+    else{
+        cout<<"计算失败"<<endl;
+    }
+    return 0;
+}
+
+
+//顺序表动态分配（指针）
+#include <iostream>
+using namespace std;
+
+#define MaxSize 50//最大容量
+typedef int ElemType;//元素类型
+
+//结构表定义
+typedef struct{
+    ElemType data[MaxSize];
+    int length;//顺序表当前元素个数
+}SqList;
+
+//创建顺序表
+void CreatList(SqList * &L,ElemType a[],int n){
+    int i =0;
+    int k=0;
+    //申请一块内存，内存大小等于SqList结构体
+    L=(SqList*) malloc (sizeof(SqList));
+
+    while (i<n){//遍历数组
+        L->data[k]=a[i];
+        k++;
+        i++;
+    }
+    L->length=k;
+}
+
+int main(){
+    SqList *L;//定义顺序表指针L
+    int arr[]={1,2,3,4,5};
+    int n=sizeof(arr)/sizeof(arr[0]);
+    //调用，直接传L
+    CreatList(L,arr,n);
+    for(int i=0;i<L->length;i++){
+        cout<<L->data[i];
+    }
+    free(L);
+    return 0;
+}
+
+
+//顺序表静态分配（不用指针）
+#include <iostream>
+using namespace std;
+
+#define MaxSize 50//最大容量
+typedef int ElemType;//元素类型
+
+//结构表定义
+typedef struct{
+    ElemType data[MaxSize];
+    int length;//顺序表当前元素个数
+}SqList;
+
+//创建顺序表
+void CreatList(SqList &L,ElemType a[],int n){
+    int i =0;
+    int k=0;
+
+    while (i<n){//遍历数组
+        L.data[k]=a[i];
+        k++;
+        i++;
+    }
+    L.length=k;
+}
+
+int main(){
+    SqList L;//定义顺序表指针L
+    int arr[]={1,2,3,4,5};
+    int n=sizeof(arr)/sizeof(arr[0]);
+    //调用，直接传L
+    CreatList(L,arr,n);
+    for(int i=0;i<L.length;i++){
+        cout<<L.data[i];
+    }
+    return 0;
+}
