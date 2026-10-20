@@ -38,6 +38,7 @@ void CreatListR(DLinkNode *&L, ElemType a[],int n) {
 		s->prior = r;
 		r = s;
 	}
+
 	r->next = L;
 	L->prior = r;
 }
@@ -66,8 +67,8 @@ bool ListEmpty(DLinkNode *L) {
 
 // 按位查找元素
 bool GetElem(DLinkNode *L, int i, ElemType &e) {
-    int j = 0;
-    DLinkNode *p = L;
+    int j = 1;
+    DLinkNode *p = L->next;
     while (j < i && p != L) {
         j++;
         p = p->next;
@@ -97,8 +98,8 @@ int LocateElem(DLinkNode *L, ElemType e) {
 
 // 在第 i 个位置插入元素 e
 bool ListInsert(DLinkNode *&L, int i, ElemType e) {
-    int j = 0;
-    DLinkNode *p = L, *s;
+    int j = 1;
+    DLinkNode *p = L->next, *s;
     while (p != L && j < i - 1) {//找到第i-1个结点
         j++;
         p = p->next;
@@ -109,17 +110,18 @@ bool ListInsert(DLinkNode *&L, int i, ElemType e) {
         s = (DLinkNode *)malloc(sizeof(DLinkNode));
         s->data = e;
         s->next = p->next;
+        s->prior = p;
         p->next->prior = s;
         p->next = s;
-        s->prior = p;
+        
         return true;
     }
 }
 
 // 删除第 i 个元素
 bool DeleteList(DLinkNode *&L, int i, ElemType &e) {
-    int j = 0;//用于遍历到i-1
-    DLinkNode *p = L, *s;
+    int j = 1;//用于遍历到i-1
+    DLinkNode *p = L->next, *s;
     while (j < i - 1 && p != L) {
         j++;
         p = p->next;
@@ -167,3 +169,4 @@ int main() {
     }
     return 0;
 }
+
